@@ -559,6 +559,51 @@ def get_cwe_cve_metrics_Scatterplot():
     fig_json = fig.to_json()
     return jsonify({'plot': fig_json})
 
+@app.route('/api/get_cve_info_detail', methods=['POST'])
+def get_cve_info_detail():
+    # Obtener el ID del cuerpo de la solicitud
+    data = request.get_json()
+    cve_id = data.get('id')
+
+    if not cve_id:
+        return jsonify({'error': 'ID no proporcionado'}), 400
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    # Consultar la tabla cve_data
+    cursor.execute('SELECT * FROM cve_data WHERE id = %s', (cve_id,))
+    cve_data = cursor.fetchone()
+
+    if not cve_data:
+        return jsonify({'error': 'CVE no encontrado'}), 404
+
+    # Consultar la tabla cvss_metrics_v31
+    cursor.execute('SELECT * FROM cvss_metrics_v31 WHERE cve_id = %s', (cve_id,))
+    cvss_metrics_v31 = cursor.fetchall()
+
+    # Consultar la tabla cvss_metrics_v2
+    cursor.execute('SELECT * FROM cvss_metrics_v2 WHERE cve_id = %s', (cve_id,))
+    cvss_metrics_v2 = cursor.fetchall()
+
+    # Consultar la tabla cwe
+    cursor.execute('SELECT * FROM cwe WHERE cve_id = %s', (cve_id,))
+    cwe_data = cursor.fetchall()
+
+    # Cerrar la conexión
+    cursor.close()
+    conn.close()
+
+    # Preparar la respuesta
+    response = {
+        'cve_data': cve_data,
+        'cvss_metrics_v31': cvss_metrics_v31,
+        'cvss_metrics_v2': cvss_metrics_v2,
+        'cwe': cwe_data
+    }
+
+    return jsonify(response)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
