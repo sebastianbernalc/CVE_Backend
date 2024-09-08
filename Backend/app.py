@@ -413,24 +413,6 @@ def get_cwe_cve_metrics_corre_graph():
     df_combined = df_v31.merge(df_v2, on='cve_id', suffixes=('_v31', '_v2'))
     df_full = df_cwe.merge(df_combined, on='cve_id')
 
-    # Agrupar por CWE y calcular las métricas promedio
-    cwe_metrics = df_full.groupby('cwe_id').agg({
-        'baseScore_v31': 'mean',
-        'exploitabilityScore_v31': 'mean',
-        'impactScore_v31': 'mean',
-        'baseScore_v2': 'mean',
-        'exploitabilityScore_v2': 'mean',
-        'impactScore_v2': 'mean'
-    }).reset_index()
-
-    # Top CWE por baseScore, exploitabilityScore e impactScore para CVSS v3.1 y v2
-    top_baseScore_v31 = cwe_metrics[['cwe_id', 'baseScore_v31']].sort_values(by='baseScore_v31', ascending=False).head(10)
-    top_exploitabilityScore_v31 = cwe_metrics[['cwe_id', 'exploitabilityScore_v31']].sort_values(by='exploitabilityScore_v31', ascending=False).head(10)
-    top_impactScore_v31 = cwe_metrics[['cwe_id', 'impactScore_v31']].sort_values(by='impactScore_v31', ascending=False).head(10)
-
-    top_baseScore_v2 = cwe_metrics[['cwe_id', 'baseScore_v2']].sort_values(by='baseScore_v2', ascending=False).head(10)
-    top_exploitabilityScore_v2 = cwe_metrics[['cwe_id', 'exploitabilityScore_v2']].sort_values(by='exploitabilityScore_v2', ascending=False).head(10)
-    top_impactScore_v2 = cwe_metrics[['cwe_id', 'impactScore_v2']].sort_values(by='impactScore_v2', ascending=False).head(10)
 
     # Crear subplots para las métricas CVSS
     fig = sp.make_subplots(rows=3, cols=2, subplot_titles=[
@@ -496,24 +478,6 @@ def get_cwe_cve_metrics_Scatterplot():
     df_combined = df_v31.merge(df_v2, on='cve_id', suffixes=('_v31', '_v2'))
     df_full = df_cwe.merge(df_combined, on='cve_id')
 
-    # Agrupar por CWE y calcular las métricas promedio
-    cwe_metrics = df_full.groupby('cwe_id').agg({
-        'baseScore_v31': 'mean',
-        'exploitabilityScore_v31': 'mean',
-        'impactScore_v31': 'mean',
-        'baseScore_v2': 'mean',
-        'exploitabilityScore_v2': 'mean',
-        'impactScore_v2': 'mean'
-    }).reset_index()
-
-    # Top CWE por baseScore, exploitabilityScore e impactScore para CVSS v3.1 y v2
-    top_baseScore_v31 = cwe_metrics[['cwe_id', 'baseScore_v31']].sort_values(by='baseScore_v31', ascending=False).head(10)
-    top_exploitabilityScore_v31 = cwe_metrics[['cwe_id', 'exploitabilityScore_v31']].sort_values(by='exploitabilityScore_v31', ascending=False).head(10)
-    top_impactScore_v31 = cwe_metrics[['cwe_id', 'impactScore_v31']].sort_values(by='impactScore_v31', ascending=False).head(10)
-
-    top_baseScore_v2 = cwe_metrics[['cwe_id', 'baseScore_v2']].sort_values(by='baseScore_v2', ascending=False).head(10)
-    top_exploitabilityScore_v2 = cwe_metrics[['cwe_id', 'exploitabilityScore_v2']].sort_values(by='exploitabilityScore_v2', ascending=False).head(10)
-    top_impactScore_v2 = cwe_metrics[['cwe_id', 'impactScore_v2']].sort_values(by='impactScore_v2', ascending=False).head(10)
 
     # Crear subplots para las métricas CVSS
     fig = sp.make_subplots(rows=3, cols=2, subplot_titles=[
@@ -544,7 +508,6 @@ def get_cwe_cve_metrics_Scatterplot():
 
     # Convertir las figuras a JSON
     fig_json = fig.to_json()
-    fig_corr_json = fig_corr.to_json()
 
 
     fig = px.scatter(df_full, 
