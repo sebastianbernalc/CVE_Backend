@@ -20,6 +20,23 @@ La carpeta `Tools` contiene dos scripts principales:
   - Funciones para guardar datos en la base de datos.
   - Análisis y clasificación de sentimientos, utilizada para analizar algunos resultados obtenidos.
 
+#### Carpeta Config
+La configuración del proyecto se realiza de manera local utilizando el archivo `Parameters.json`. Este archivo contiene la configuración necesaria para conectar con la API de NIST y la base de datos MySQL.
+```json
+{
+    "api": {
+        "url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "endpoint": "?cveId="
+    },
+    "database": {
+        "user": "root",
+        "password": "mysql123",
+        "host": "localhost",
+        "database": "vulnerabilities_db"
+    }
+}
+```
+
 #### Carpeta Sql
 En la carpeta `Sql` contiene 1 archivo el cual contiene todas las consultas sql para crear base de datos y tablas enlazandolas con una llave foranea 
 ### Estructura de la Base de Datos
