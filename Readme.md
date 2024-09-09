@@ -153,6 +153,11 @@ Esta aplicación backend proporciona una API basada en Flask para analizar datos
 
 En esta web se puede visualizar algunos graficos creados con la información de la base de datos previamente cargada, se comporta como un dashboard en el cual se tiene la opcion de mirar los graficos relevantes de las vulnerabilidades o hacer una busqueda por CVE para conocer toda su información.
 
+## Mensaje de Alerta
+
+Recuerda que el backend debe estar en ejecución para que el frontend pueda consumir la API. Asegúrate de tener el archivo `app.py` ejecutándose antes de utilizar la aplicación.
+
+
 ## Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
