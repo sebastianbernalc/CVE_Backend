@@ -149,3 +149,45 @@ Esta aplicación backend proporciona una API basada en Flask para analizar datos
 - Ampliar el manejo de errores y la validación de entrada para una operación más robusta. 
 
 
+# Frontend
+
+En esta web se puede visualizar algunos graficos creados con la información de la base de datos previamente cargada, se comporta como un dashboard en el cual se tiene la opcion de mirar los graficos relevantes de las vulnerabilidades o hacer una busqueda por CVE para conocer toda su información.
+
+## Requisitos Previos
+
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
+
+- Node.js (versión 14.0.0 o superior)
+- npm (normalmente viene con Node.js)
+
+## Instalación
+
+Sigue estos pasos para configurar el proyecto en tu máquina local:
+
+1. Clona el repositorio:
+   ```
+   git clone https://github.com/tu-usuario/tu-proyecto.git
+   ```
+
+2. Navega al directorio del proyecto:
+   ```
+   cd tu-proyecto
+   ```
+
+3. Instala las dependencias:
+   ```
+   npm install
+   ```
+
+## Ejecutar la Aplicación
+
+Para iniciar la aplicación en modo de desarrollo:
+
+```
+npm start
+```
+
+Esto ejecutará la aplicación en modo de desarrollo. Abre [http://localhost:3000](http://localhost:3000) para verla en tu navegador.
+
+La página se recargará automáticamente cuando hagas cambios en el código. También verás cualquier error de lint en la consola.
+
